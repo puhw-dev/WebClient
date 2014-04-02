@@ -8,12 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return render_template('index.html')
-
-# @app.route("/templating")
-# def templating():
-#     app.logger.debug("Omg, I'm loggin somethin... ;-)")
-#     return render_template('hello.html', name="Wiktorek")
-
+    
 @app.route("/json_sin")
 def json_sin():
     values = [["x", "y"]]
