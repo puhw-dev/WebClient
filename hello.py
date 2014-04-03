@@ -1,14 +1,15 @@
+#!/usr/bin/python
 from flask import Flask
 from flask import render_template, jsonify, Response
 import json
 import math
 from random import random
-app = Flask(__name__)
+app = Flask(__name__, static_path="/static", static_url_path="/static")
 
 @app.route("/")
 def hello():
     return render_template('index.html')
-    
+
 @app.route("/json_sin")
 def json_sin():
     values = [["x", "y"]]
