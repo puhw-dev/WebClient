@@ -81,7 +81,7 @@
       }
 
       function getDataAndPlot() {
-        $.get("http://localhost:5000/json_sin", function(data) {
+        $.get("/json_sin", function(data) {
           drawChart(data);
         }); 
       }
