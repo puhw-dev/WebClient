@@ -18,4 +18,4 @@ def json_sin():
     return Response(json.dumps(values), mimetype='application/json')
 
 if __name__ == "__main__":
-    app.run(use_debugger=True, use_reloader=True, debug=True)
+    app.run(use_debugger=True, use_reloader=True, debug=True, port=80)
