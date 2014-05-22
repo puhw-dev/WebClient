@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from flask import Flask
-from flask import render_template, jsonify, Response
+from flask import render_template, jsonify, Response, request
+from string import replace
 import json
 import math
 from random import random
@@ -9,6 +10,35 @@ app = Flask(__name__, static_path="/static", static_url_path="/static")
 @app.route("/")
 def hello():
     return render_template('index.html')
+
+@app.route("/monitors_list")
+def monitors_list():
+    # mocked dummy data
+    # TODO: replace with data from catalog when it'll be ready
+    # This json data is based on API documentation
+    json_data = '''[{
+        "name": "monitor1", "ip": "10.0.0.1", "href": "{catalog-uri}/monitors/monitor1"
+        },{
+        "name": "monitor2", "ip": "10.0.0.2", "href": "{catalog-uri}/monitors/monitor2"
+        }]'''
+    catalog_url = request.url_root # now it's just webgui URL
+    json_data = replace(json_data, "{catalog-uri}", catalog_url)
+
+    monitors_data = json.loads(json_data)
+
+    monitor_names = [{"text" : monitor["name"], "id" : monitor["name"], "children" : True} for monitor in monitors_data]
+    json_tree_data = json.dumps({"core" : {"data": monitor_names}})
+    json_tree_data = json.dumps(monitor_names)
+
+    return Response(json_tree_data, mimetype='application/json')
+
+@app.route("/monitor")
+def hosts_list():
+    monitor_name = request.args["name"] 
+
+    list_of_hosts = ("Sample list of hosts loaded with AJAX call for " + monitor_name).split(" ")
+    return Response(json.dumps(list_of_hosts), mimetype='application/json')
+
 
 @app.route("/json_sin")
 def json_sin():

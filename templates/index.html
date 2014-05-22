@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/jstree/dist/themes/default/style.min.css" />
  
   </head>
 
@@ -43,7 +44,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <p>Hosts tree here</p> 
+          <p>Monitors tree</p> 
+
+          <div id="jstree"></div>
+
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -66,6 +70,29 @@
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../assets/js/docs.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="/static/jstree/dist/jstree.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // $.get("/monitors_list", function(data) {
+        //   $('#jstree').jstree(data); 
+        // });
+        $('#jstree').jstree({
+          'core' : {
+            'data' : {
+              'url' : function (node) {
+                return node.id === '#' ? 
+                  '/monitors_list' : 
+                  '/monitor';
+              },
+              'data' : function (node) {
+                return { 'name' : node.id };
+              }
+            }
+        }});
+      });
+    </script>
+
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       // google.setOnLoadCallback(drawChart);
