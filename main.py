@@ -2,9 +2,10 @@
 from flask import Flask
 from flask import render_template, jsonify, Response, request
 from string import replace
+from random import random
 import json
 import math
-from random import random
+
 app = Flask(__name__, static_path="/static", static_url_path="/static")
 
 @app.route("/")
@@ -26,18 +27,40 @@ def monitors_list():
 
     monitors_data = json.loads(json_data)
 
-    monitor_names = [{"text" : monitor["name"], "id" : monitor["name"], "children" : True} for monitor in monitors_data]
-    json_tree_data = json.dumps({"core" : {"data": monitor_names}})
+    monitor_names = [{"text": monitor["name"], "id": monitor["name"], "children": True} for monitor in monitors_data]
     json_tree_data = json.dumps(monitor_names)
 
     return Response(json_tree_data, mimetype='application/json')
 
 @app.route("/monitor")
 def hosts_list():
-    monitor_name = request.args["name"] 
-
+    # mocked data
+    # TODO: it should be request to {monitorURI}/hosts/ (GET)
+    monitor_name = request.args["name"]
     list_of_hosts = ("Sample list of hosts loaded with AJAX call for " + monitor_name).split(" ")
     return Response(json.dumps(list_of_hosts), mimetype='application/json')
+
+@app.route("/monitor/<hostname>/sensors/")
+def sensors_list(hostname):
+    # mocked data again ;-)
+    # TODO: it should be request to {monitorURI}/hosts/{hostname}/sensors/ (GET)
+    dummy_data = '''{
+        "hostname": "%(hostname)s", "ip" : "10.0.1.128", "href": "http://10.0.0.1/hosts/%(hostname)s",
+        "sensors": [{
+        "sensorname": "sensor1 for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor1"
+        },{
+        "sensorname": "sensor2 for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor2"
+        },{
+        "sensorname": "superduper third sensor for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor2"
+        }]
+        }'''
+
+    dummy_data = dummy_data % {"hostname": hostname}
+
+    return Response(dummy_data, mimetype='application/json')
 
 
 @app.route("/json_sin")
@@ -48,4 +71,4 @@ def json_sin():
     return Response(json.dumps(values), mimetype='application/json')
 
 if __name__ == "__main__":
-    app.run(use_debugger=True, use_reloader=True, debug=True, port=80)
+    app.run(use_debugger=True, use_reloader=True, debug=True, port=80) # needs to be 80 for heroku

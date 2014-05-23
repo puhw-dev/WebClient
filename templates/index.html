@@ -52,6 +52,12 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
 
+          <h2>Available sensors:</h2>
+
+          <ul id="available_sensors_container">
+
+          </ul>
+
           <div id="chart_div" style="width: 800px; height: 500px;"></div>
 
           <a href="#" class="btn btn-default btn-success" id="refresh_plot">Refresh plot</a>
@@ -74,9 +80,6 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        // $.get("/monitors_list", function(data) {
-        //   $('#jstree').jstree(data); 
-        // });
         $('#jstree').jstree({
           'core' : {
             'data' : {
@@ -90,7 +93,26 @@
               }
             }
         }});
+
+        $('#jstree').on("select_node.jstree", function(node, selected, event) {
+            if (selected.node.parent != '#') {
+                loadSensorsForHost(selected.node.text); // it definitely shouldn't be based on node's text ;-)
+            }
+        });
       });
+
+      function loadSensorsForHost(hostname) {
+        $.get("/monitor/" + hostname + "/sensors/", function(data) {
+
+            var available_sensors_container = $("#available_sensors_container");
+            available_sensors_container.html(""); // clean the list
+
+            data.sensors.forEach(function(sensor) {
+                available_sensors_container.append("<li>" + sensor.sensorname + "</li>");
+            });
+
+        });
+      }
     </script>
 
     <script type="text/javascript">
