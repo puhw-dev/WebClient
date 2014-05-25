@@ -66,83 +66,18 @@
          
           <p>Some properties... someday... ;-)</p> 
         
+        </div>
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/docs.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="/static/jstree/dist/jstree.min.js"></script>
+    <script type="text/javascript" src="/static/jstree/dist/jstree.min.js"></script>
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#jstree').jstree({
-          'core' : {
-            'data' : {
-              'url' : function (node) {
-                return node.id === '#' ? 
-                  '/monitors_list' : 
-                  '/monitor';
-              },
-              'data' : function (node) {
-                return { 'name' : node.id };
-              }
-            }
-        }});
+    <script type="text/javascript" src="/static/js/monitorsTree.js"></script>
 
-        $('#jstree').on("select_node.jstree", function(node, selected, event) {
-            if (selected.node.parent != '#') {
-                loadSensorsForHost(selected.node.text); // it definitely shouldn't be based on node's text ;-)
-            }
-        });
-      });
-
-      function loadSensorsForHost(hostname) {
-        $.get("/monitor/" + hostname + "/sensors/", function(data) {
-
-            var available_sensors_container = $("#available_sensors_container");
-            available_sensors_container.html(""); // clean the list
-
-            data.sensors.forEach(function(sensor) {
-                available_sensors_container.append("<li>" + sensor.sensorname + "</li>");
-            });
-
-        });
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      // google.setOnLoadCallback(drawChart);
-      function drawChart(dataArray) {
-        var data = google.visualization.arrayToDataTable(dataArray);
-
-        var options = {
-          title: 'Dummy sinus'
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-
-      function getDataAndPlot() {
-        $.get("/json_sin", function(data) {
-          drawChart(data);
-        }); 
-      }
-
-      $(document).ready(function() {
-        getDataAndPlot(); 
-
-        $("#refresh_plot").click(function() {
-          getDataAndPlot();
-        });
-      });
-    </script>
+    <script type="text/javascript" src="/static/js/dummyPlot.js"></script>
 
   </body>
 </html>
