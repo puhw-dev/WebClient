@@ -1,83 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
 
-    <title>Dashboard</title>
+		<title>Dashboard</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core CSS -->
+		<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="/static/css/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/jstree/dist/themes/default/style.min.css" />
- 
-  </head>
+		<!-- Custom styles for this template -->
+		<link href="/static/css/dashboard.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/jstree/dist/themes/default/style.min.css" />
+		<link rel="stylesheet" href="/static/select2/select2.css" />
 
-  <body>
+	</head>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Passive Uninterrupted Host Watchdog</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+	<body>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <p>Monitors tree</p> 
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Passive Uninterrupted Host Watchdog</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Dashboard</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-          <div id="jstree"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<p>Monitors tree</p> 
 
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+					<div id="jstree"></div>
 
-          <h2>Available sensors:</h2>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<h1 class="page-header">Dashboard</h1>
 
-          <ul id="available_sensors_container">
+					<p>
+							<label>Available sensors:</label>
 
-          </ul>
+							<select id="available_sensors">
+									<option>Select host to load sensors</option>
+							</select>
+					</p>
 
-          <div id="chart_div" style="width: 800px; height: 500px;"></div>
+					<div id="chart_div" style="width: 800px; height: 500px;"></div>
 
-          <a href="#" class="btn btn-default btn-success" id="refresh_plot">Refresh plot</a>
-          
-          <h2 class="sub-header">Properties</h2>
-         
-          <p>Some properties... someday... ;-)</p> 
-        
-        </div>
-      </div>
-    </div>
+					<a href="#" class="btn btn-default btn-success" id="refresh_plot">Refresh plot</a>
+					
+					<h2 class="sub-header">Properties</h2>
+				 
+					<p>Some properties... someday... ;-)</p> 
+				
+				</div>
+			</div>
+		</div>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="/static/jstree/dist/jstree.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript" src="/static/jstree/dist/jstree.min.js"></script>
+		<script type="text/javascript" src="/static/select2/select2.js"></script>
 
-    <script type="text/javascript" src="/static/js/monitorsTree.js"></script>
+		<script type="text/javascript" src="/static/js/monitorsTree.js"></script>
+		<script type="text/javascript" src="/static/js/dummyPlot.js"></script>
+		<script type="text/javascript" src="/static/js/sensorsList.js"></script>
 
-    <script type="text/javascript" src="/static/js/dummyPlot.js"></script>
-
-  </body>
+	</body>
 </html>

@@ -94,3 +94,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+#available_sensors {
+    width: 500px;
+}
