@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os
 from flask import Flask
 from flask import render_template, jsonify, Response, request
 from string import replace
@@ -22,7 +23,7 @@ def monitors_list():
         },{
         "name": "monitor2", "ip": "10.0.0.2", "href": "{catalog-uri}/monitors/monitor2"
         }]'''
-    catalog_url = request.url_root # now it's just webgui URL
+    catalog_url = request.url_root  # now it's just webgui URL
     json_data = replace(json_data, "{catalog-uri}", catalog_url)
 
     monitors_data = json.loads(json_data)
@@ -71,4 +72,5 @@ def json_sin():
     return Response(json.dumps(values), mimetype='application/json')
 
 if __name__ == "__main__":
-    app.run(use_debugger=True, use_reloader=True, debug=True, port=80) # needs to be 80 for heroku
+    port = int(os.getenv('PORT', 80))
+    app.run(use_debugger=True, use_reloader=True, debug=True, port=port)
