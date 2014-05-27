@@ -1,1 +1,3 @@
-CATALOG_ADDRESS = "http://____:8888"
+import os
+
+CATALOG_HOST = os.getenv('CATALOG_HOST')

@@ -9,10 +9,7 @@ import json
 import math
 
 app = Flask(__name__, static_path="/static", static_url_path="/static")
-if os.getenv('ENV', 'DEV') == "HEROKU":
-    app.config.from_pyfile("config_heroku.py")
-else:
-    app.config.from_pyfile("config.py")
+app.config.from_pyfile("config.py")
 
 @app.route("/")
 def hello():
@@ -20,7 +17,7 @@ def hello():
 
 @app.route("/catalog/monitors")
 def monitors_list():
-    catalog_address = app.config.get("CATALOG_ADDRESS")
+    catalog_address = app.config.get("CATALOG_HOST")
     monitors_list_request = requests.get(catalog_address + "/monitors")
 
     json_data = monitors_list_request.text
