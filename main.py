@@ -13,7 +13,7 @@ app = Flask(__name__, static_path="/static", static_url_path="/static")
 def hello():
     return render_template('index.html')
 
-@app.route("/monitors_list")
+@app.route("/catalog/monitors")
 def monitors_list():
     # mocked dummy data
     # TODO: replace with data from catalog when it'll be ready
@@ -33,33 +33,51 @@ def monitors_list():
 
     return Response(json_tree_data, mimetype='application/json')
 
-@app.route("/monitor")
+@app.route("/monitor/hosts")
 def hosts_list():
     # mocked data
     # TODO: it should be request to {monitorURI}/hosts/ (GET)
     monitor_name = request.args["name"]
-    list_of_hosts = ("Sample list of hosts loaded with AJAX call for " + monitor_name).split(" ")
+    list_of_hosts = ["host1", "host2", "host3"]
     return Response(json.dumps(list_of_hosts), mimetype='application/json')
 
-@app.route("/monitor/<hostname>/sensors/")
+@app.route("/monitor/hosts/<hostname>/sensors/")
 def sensors_list(hostname):
     # mocked data again ;-)
     # TODO: it should be request to {monitorURI}/hosts/{hostname}/sensors/ (GET)
     dummy_data = '''{
         "hostname": "%(hostname)s", "ip" : "10.0.1.128", "href": "http://10.0.0.1/hosts/%(hostname)s",
         "sensors": [{
-        "sensorname": "sensor1 for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "sensorname": "sensor1_for_%(hostname)s", "owner": "user1", "rpm": "10",
         "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor1"
         },{
-        "sensorname": "sensor2 for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "sensorname": "sensor2_for_%(hostname)s", "owner": "user1", "rpm": "10",
         "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor2"
         },{
-        "sensorname": "superduper third sensor for '%(hostname)s' host", "owner": "user1", "rpm": "10",
+        "sensorname": "superduper_third_sensor_for_%(hostname)s_host", "owner": "user1", "rpm": "10",
         "href": "http://10.0.0.1/hosts/%(hostname)s/sensors/sensor2"
         }]
         }'''
 
     dummy_data = dummy_data % {"hostname": hostname}
+
+    return Response(dummy_data, mimetype='application/json')
+
+@app.route("/monitor/hosts/<hostname>/sensors/<sensorname>/metrics")
+def metrics_list(hostname, sensorname):
+    dummy_data = '''{
+        "sensorname": "%(sensorname)s",
+        "hostname": "%(hostname)s",
+        "owner": "user1", "rpm": "10",
+        "href": "http://10.0.0.1/hosts/box/sensors/sensor1",
+        "metrics": [{
+        "name": "metric1", "href": "http://10.0.0.1/hosts/box/sensors/sensor1/metrics/metric1"
+        },{
+        "name": "metric2", "href": "http://10.0.0.1/hosts/box/sensors/sensor1/metrics/metric1"
+        }]
+        }'''
+
+    dummy_data = dummy_data % {"hostname": hostname, "sensorname": sensorname}
 
     return Response(dummy_data, mimetype='application/json')
 
