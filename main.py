@@ -1,13 +1,18 @@
 #!/usr/bin/python
 import os
+import requests
 from flask import Flask
-from flask import render_template, jsonify, Response, request
+from flask import render_template, Response, request
 from string import replace
 from random import random
 import json
 import math
 
 app = Flask(__name__, static_path="/static", static_url_path="/static")
+if os.getenv('ENV', 'DEV') == "HEROKU":
+    app.config.from_pyfile("config_heroku.py")
+else:
+    app.config.from_pyfile("config.py")
 
 @app.route("/")
 def hello():
@@ -15,16 +20,10 @@ def hello():
 
 @app.route("/catalog/monitors")
 def monitors_list():
-    # mocked dummy data
-    # TODO: replace with data from catalog when it'll be ready
-    # This json data is based on API documentation
-    json_data = '''[{
-        "name": "monitor1", "ip": "10.0.0.1", "href": "{catalog-uri}/monitors/monitor1"
-        },{
-        "name": "monitor2", "ip": "10.0.0.2", "href": "{catalog-uri}/monitors/monitor2"
-        }]'''
-    catalog_url = request.url_root  # now it's just webgui URL
-    json_data = replace(json_data, "{catalog-uri}", catalog_url)
+    catalog_address = app.config.get("CATALOG_ADDRESS")
+    monitors_list_request = requests.get(catalog_address + "/monitors")
+
+    json_data = monitors_list_request.text
 
     monitors_data = json.loads(json_data)
 

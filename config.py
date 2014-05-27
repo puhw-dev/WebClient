@@ -1,0 +1,1 @@
+CATALOG_ADDRESS = "http://____:8888"
