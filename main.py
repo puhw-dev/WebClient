@@ -175,4 +175,4 @@ if __name__ == "__main__":
     if env == 'DEV':
         app.run(use_debugger=True, use_reloader=False, debug=True, port=port)
     else:
-        app.run(use_debugger=False, use_reloader=False, debug=False, port=port)
+        app.run(host='0.0.0.0', use_debugger=False, use_reloader=False, debug=False, port=port)
