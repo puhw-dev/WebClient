@@ -11,16 +11,16 @@ class MonitorDataProvider:
         self.request_timeout = request_timeout
 
     def get_hosts(self):
-        return self.monitor_get_request(self.monitor_ip, "/hosts")
+        return self.monitor_request("/hosts")
 
     def get_sensors(self, hostname):
-        return self.monitor_get_request(self.monitor_ip, "/hosts/" + hostname + "/sensors")
+        return self.monitor_request("/hosts/" + hostname + "/sensors")
 
     def get_metrics(self, hostname, sensorname):
-        return self.monitor_get_request(self.monitor_ip, "/hosts/" + hostname + "/sensors/" + sensorname + "/metrics")
+        return self.monitor_request("/hosts/" + hostname + "/sensors/" + sensorname + "/metrics")
 
-    def monitor_get_request(self, monitor_ip, url):
-        """Performs GET request to monitor based on provided ip and path"""
-        full_url = "http://" + monitor_ip + url
+    def monitor_request(self, url):
+        """Performs GET request to monitor based on path"""
+        full_url = "http://" + self.monitor_ip + url
         get_request = requests.get(full_url, timeout=self.request_timeout)
         return get_request.text
