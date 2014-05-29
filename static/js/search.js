@@ -1,5 +1,15 @@
 function formatSearchResult(entity) {
-    var singleResult = '<table><tr><td>' + entity.name + ' <span class="entity-type">' + entity.type + '</td></span></tr></table>';
+    var singleResult = '<div>' + entity.name + ' <span class="entity-type">' + entity.type;
+
+    if (entity.type == "sensor") {
+        singleResult += ' (' + entity.host + ')';
+    }
+
+    if (entity.type == "metric") {
+        singleResult += ' (' + entity.host + ' &raquo; ' + entity.sensor + ')';
+    }
+
+    singleResult += '</div>'
 
     return singleResult;
 }
