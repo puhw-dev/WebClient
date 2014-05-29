@@ -31,13 +31,11 @@ function loadSensorsForHost(monitor_ip, hostname) {
             var available_sensors = $("#available_sensors");
             available_sensors.html(""); // clean the list
 
-            getMetrics(hostname, data.sensors[0].sensorname, monitor_ip);
-
             data.sensors.forEach(function(sensor) {
                 available_sensors.append('<option value="' + sensor.sensorname + '" data-monitor-ip="' + monitor_ip +'" data-hostname="' + hostname +'">' + sensor.sensorname + '</option>');
             });
 
-            available_sensors.select2({width: "element"});
+            getMetrics(hostname, data.sensors[0].sensorname, monitor_ip);
 	    }
 	);
 }

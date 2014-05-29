@@ -96,5 +96,19 @@ body {
 }
 
 #available_sensors {
-    width: 500px;
+    width: 300px;
 }
+
+#search_container {
+  padding: 10px;
+}
+
+#search {
+  width: 400px;
+}
+
+.entity-type {
+  color: #999;
+  font-style: italic;
+}
+
