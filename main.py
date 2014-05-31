@@ -79,6 +79,20 @@ def metrics_list(hostname, sensorname):
     return Response(metrics_list_data, mimetype='application/json')
 
 
+@app.route("/monitor/hosts/<host_name>/sensors/<sensor_name>/metrics/<metric_name>")
+def metric_data(host_name, sensor_name, metric_name):
+    """Returns metric data"""
+    monitor_ip = request.args["ip"]
+    monitor_data_provider = MonitorDataProvider(monitor_ip)
+
+    try:
+        metric_data_json = monitor_data_provider.get_metric_data(host_name, sensor_name, metric_name)
+    except requests.Timeout:
+        return Response("Timeout", 408)
+
+    return Response(metric_data_json, mimetype='application/json')
+
+
 @app.route("/search")
 def search():
     """Method which filters search results from file"""

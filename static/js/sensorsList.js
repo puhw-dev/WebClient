@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    //$("#available_sensors").select2({width: "element"});
 
     $("#available_sensors").on("change", function() {
         var sensorname = this.value
