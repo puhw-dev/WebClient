@@ -68,10 +68,21 @@
 					</p>
 
 					<div id="chart_div" style="width: 1000px; height: 500px;"></div>
-
-					<a href="#" class="btn btn-default btn-success" id="refresh_plot">Refresh plot</a>
 					
 					<h4 class="sub-header">Properties</h4>
+
+					<div>
+						<div class="form-row">
+							<label>Autorefresh every: </label> 
+							<select id="autorefresh">
+								<option value="disabled">Disabled</option>
+								<option value="3">3s</option>
+								<option value="10">10s</option>
+								<option value="30">30s</option>
+								<option value="60">60s</option>
+							</select>
+						</div>
+					</div>
 
 				</div>
 			</div>
@@ -83,11 +94,13 @@
 		<script type="text/javascript" src="/static/thirdparty/jstree/dist/jstree.min.js"></script>
 		<script type="text/javascript" src="/static/thirdparty/select2/select2.js"></script>
 
+        <script type="text/javascript" src="/static/js/metricData.js"></script>
         <script type="text/javascript" src="/static/js/metricsList.js"></script>
 		<script type="text/javascript" src="/static/js/monitorsTree.js"></script>
 		<script type="text/javascript" src="/static/js/dummyPlot.js"></script>
 		<script type="text/javascript" src="/static/js/sensorsList.js"></script>
 		<script type="text/javascript" src="/static/js/search.js"></script>
+		<script type="text/javascript" src="/static/js/plotParameters.js"></script>
 
 	</body>
 </html>
