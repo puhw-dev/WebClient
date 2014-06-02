@@ -1,4 +1,6 @@
 function displayMetricData(monitorIP, hostname, sensorname, metricname) {
+    $("#placeholder").hide();
+    $("#metric_data").fadeIn();
     $.get(
         "/monitor/hosts/" + hostname + "/sensors/" + sensorname + "/metrics/" + metricname, 
         {

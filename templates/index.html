@@ -50,7 +50,6 @@
 
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-					<!--<h1 class="page-header">Dashboard</h1>-->
 
 					<p>
 							<label>Sensor:</label>
@@ -67,29 +66,33 @@
 
 					</p>
 
-					<div id="chart_div" style="width: 1000px; height: 500px;"></div>
-					
-					<h4 class="sub-header">Properties</h4>
+                    <div id="placeholder">Please select metric from the list above to see the data.</div>
 
-					<div>
-						<div class="form-row">
-							<label>Autorefresh every: </label> 
-							<select id="autorefresh">
-								<option value="disabled">Disabled</option>
-								<option value="3">3s</option>
-								<option value="10">10s</option>
-								<option value="30">30s</option>
-								<option value="60">60s</option>
-							</select>
+                    <div id="metric_data">
+						<div id="chart_div" style="width: 1000px; height: 500px;"></div>
+						
+						<div id="properties">
+	                        <h4 class="sub-header">Properties</h4>
+
+							<div class="form-row">
+								<label>Autorefresh every: </label> 
+								<select id="autorefresh">
+									<option value="disabled">Disabled</option>
+									<option value="3">3s</option>
+									<option value="10">10s</option>
+									<option value="30">30s</option>
+									<option value="60">60s</option>
+								</select>
+							</div>
+
+	                        <div class="form-row">
+	                            <label>Number of datapoints:</label>
+	                            <input type="number" name="number_of_datapoints" id="number_of_datapoints" value="50" min="5" max="1000"/>
+	                        </div>
+	                        <div class="form-row">
+	                        	<button class="btn btn-sm btn-success" id="apply_plot_parameters">Apply</button>
+	                        </div>
 						</div>
-
-                        <div class="form-row">
-                            <label>Number of datapoints:</label>
-                            <input type="number" name="number_of_datapoints" id="number_of_datapoints" value="50" min="5" max="1000"/>
-                        </div>
-                        <div class="form-row">
-                        	<button class="btn btn-sm btn-success" id="apply_plot_parameters">Apply</button>
-                        </div>
 					</div>
 
 				</div>
