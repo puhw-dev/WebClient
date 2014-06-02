@@ -83,10 +83,11 @@ def metrics_list(hostname, sensorname):
 def metric_data(host_name, sensor_name, metric_name):
     """Returns metric data"""
     monitor_ip = request.args["ip"]
+    number_of_datapoints = request.args["number_of_datapoints"]
     monitor_data_provider = MonitorDataProvider(monitor_ip)
 
     try:
-        metric_data_json = monitor_data_provider.get_metric_data(host_name, sensor_name, metric_name)
+        metric_data_json = monitor_data_provider.get_metric_data(host_name, sensor_name, metric_name, number_of_datapoints)
     except requests.Timeout:
         return Response("Timeout", 408)
 

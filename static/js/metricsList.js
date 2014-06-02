@@ -16,6 +16,8 @@ function getMetrics(hostname, sensorname, monitorIP) {
 
             if (data.metrics.length == 0) {
                 available_metrics.append("<option>No metrics, sorry dude</option>");
+            } else {
+                available_metrics.trigger("change");
             }
         }
     );

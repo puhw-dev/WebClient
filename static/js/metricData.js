@@ -2,7 +2,8 @@ function displayMetricData(monitorIP, hostname, sensorname, metricname) {
     $.get(
         "/monitor/hosts/" + hostname + "/sensors/" + sensorname + "/metrics/" + metricname, 
         {
-            "ip": monitorIP
+            "ip": monitorIP,
+            "number_of_datapoints": $("#number_of_datapoints").val()
         },
         function(data) {
             var chartData = new google.visualization.DataTable();

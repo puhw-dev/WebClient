@@ -19,9 +19,8 @@ class MonitorDataProvider:
     def get_metrics(self, hostname, sensor):
         return self.monitor_request("/hosts/" + hostname + "/sensors/" + sensor + "/metrics")
 
-    def get_metric_data(self, hostname, sensor, metric):
-        # TODO: n=50 should be parametrized
-        return self.monitor_request("/hosts/" + hostname + "/sensors/" + sensor + "/metrics/" + metric + "/data?n=50")
+    def get_metric_data(self, hostname, sensor, metric, number_of_datapoints=50):
+        return self.monitor_request("/hosts/" + hostname + "/sensors/" + sensor + "/metrics/" + metric + "/data?n=" + number_of_datapoints)
 
     def monitor_request(self, url):
         """Performs GET request to monitor based on path"""

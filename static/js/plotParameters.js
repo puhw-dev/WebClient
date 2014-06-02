@@ -8,4 +8,8 @@ $(document).ready(function() {
             metricRefreshInterval = setInterval(function() { refreshCurrentMetricFunction(); }, parseInt(refreshEvery) * 1000);
         }
     });
+
+    $("#apply_plot_parameters").click(function() {
+        refreshCurrentMetricFunction();
+    });
 });

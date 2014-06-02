@@ -112,3 +112,7 @@ body {
   font-style: italic;
 }
 
+#number_of_datapoints {
+  width: 60px;
+}
+
