@@ -8,25 +8,46 @@ function displayMetricData(monitorIP, hostname, sensorname, metricname) {
             "number_of_datapoints": $("#number_of_datapoints").val()
         },
         function(data) {
-            var chartData = new google.visualization.DataTable();
+            $("#metric_name").html(metricname);
 
-            var options = {
-                title: metricname
-            }
+            // It shouldn't be based on sensor name but it's hardcoded like this cause we don't provide info about type of metric in Catalog's API
+            if (sensorname.toLowerCase().indexOf("sysinf") > -1) {
+                $("#chart_div").hide();
+                $("#text_data").fadeIn();
 
-            chartData.addColumn('datetime', 'Time');
-            chartData.addColumn('number', metricname);
-
-            data.metrics[2].data.forEach(function(row) {
-                for (var time in row) {
-                    var date = new Date(time*1000);
-                    var value = parseInt(row[time]);
-                    chartData.addRow([date, value]);
+                var metricValue = 'No value';
+                var singleMetricValue = data.metrics[2].data[0];
+                for (var val in singleMetricValue) {
+                    metricValue = singleMetricValue[val];
                 }
-            });
 
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-            chart.draw(chartData, options);
+                $("#metric_value").html(metricValue);
+
+            } else {
+                $("#text_data").hide();
+                $("#chart_div").fadeIn();
+                var chartData = new google.visualization.DataTable();
+
+                var options = {
+                    title: metricname
+                }
+
+                chartData.addColumn('datetime', 'Time');
+                chartData.addColumn('number', metricname);
+
+                var metricData = data.metrics[2].data;
+
+                metricData.forEach(function(row) {
+                    for (var time in row) {
+                        var date = new Date(time*1000);
+                        var value = parseInt(row[time]);
+                        chartData.addRow([date, value]);
+                    }
+                });
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(chartData, options);
+            } 
         }
     );
 }
