@@ -117,10 +117,26 @@ def create_compound_metric(host_name, sensor_name, metric_name):
     average = request.form["average"]
     login = request.form["login"]
     password = request.form["password"]
+    monitor_ip = request.form["monitor_ip"]
 
-    log.info(name + " " + rpm + " " + average + " " + login + " " + password)
+    request_data = {'compoundMetricName': name, 'rpm': rpm, 'average': average, 'login': login, 'password': password}
 
-    return Response("Compound metric created", 201)
+    response = requests.post("http://" + monitor_ip + "/hosts/" + host_name + "/sensors/" + sensor_name + "/metrics/" + metric_name, data=json.dumps(request_data))
+
+    return Response(response.content, response.status_code)
+
+
+@app.route("/delete-compound-metric/<host_name>/<sensor_name>/<metric_name>", methods=['POST'])
+def delete_compound_metric(host_name, sensor_name, metric_name):
+    login = request.form["login"]
+    password = request.form["password"]
+    monitor_ip = request.form["monitor_ip"]
+
+    request_data = {'login': login, 'password': password}
+
+    response = requests.delete("http://" + monitor_ip + "/hosts/" + host_name + "/sensors/" + sensor_name + "/metrics/" + metric_name, data=json.dumps(request_data))
+
+    return Response(response.content, response.status_code)
 
 
 if __name__ == "__main__":

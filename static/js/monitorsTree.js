@@ -32,7 +32,7 @@ function loadSensorsForHost(monitor_ip, hostname) {
             available_sensors.html(""); // clean the list
 
             data.sensors.forEach(function(sensor) {
-                available_sensors.append('<option value="' + sensor.sensorname + '" data-monitor-ip="' + monitor_ip +'" data-hostname="' + hostname +'">' + sensor.sensorname + '</option>');
+                available_sensors.append('<option value="' + sensor.sensorname + '" data-sensortype="' + sensor.sensortype + '" data-monitor-ip="' + monitor_ip +'" data-hostname="' + hostname +'">' + sensor.sensorname + '</option>');
             });
 
             getMetrics(hostname, data.sensors[0].sensorname, monitor_ip);

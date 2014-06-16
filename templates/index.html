@@ -64,6 +64,14 @@
 									<option>Select sensor to load metrics</option>
 							</select>
 
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-compound-metric">
+								Delete current metric
+					        </button>
+
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-compound-metric">
+					          <span class="glyphicon glyphicon-plus"></span> New compound metric
+					        </button>
+
 					</p>
 
                     <div id="placeholder">Please select metric from the list above to see the data.</div>
@@ -108,6 +116,70 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="add-compound-metric">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	            <h4 class="modal-title">New compound metric</h4>
+	          </div>
+	          <div class="modal-body">
+	            <form role="form">
+	              <div class="form-row">
+	                <label for="comp-metric-name">Metric name</label>
+	                <input type="email" class="form-control" id="comp-metric-name">
+	              </div>
+	              <div class="form-row">
+	                <label for="comp-metric-name">Average</label>
+	                <input type="number" class="form-control" id="comp-metric-average" value="10" min="5" max="50">
+	              </div>
+	              <div class="form-row">
+	                <label for="comp-metric-name">RPM</label>
+	                <input type="number" class="form-control" id="comp-metric-rpm" value="4" min="1" max="60">
+	              </div>
+	              <div class="form-row">
+	                <label for="comp-metric-name">Login</label>
+	                <input type="email" class="form-control" id="comp-metric-login">
+	              </div>
+	              <div class="form-row">
+	                <label for="comp-metric-name">Password</label>
+	                <input type="password" class="form-control" id="comp-metric-password">
+	              </div>
+	            </form>
+	          </div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-success" id="add-compound-metric-button">Add</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="modal fade" id="delete-compound-metric">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	            <h4 class="modal-title">Delete compound metric</h4>
+	          </div>
+	          <div class="modal-body">
+	            <form role="form">
+	              <div class="form-row"
+	                <label for="comp-metric-name">Login</label>
+	                <input type="email" class="form-control" id="comp-metric-login">
+	              </div>
+	              <div class="form-row">
+	                <label for="comp-metric-name">Password</label>
+	                <input type="password" class="form-control" id="comp-metric-password">
+	              </div>
+	            </form>
+	          </div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-danger" id="delete-compound-metric-button">Delete</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script type="text/javascript" src="/static/thirdparty/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -120,6 +192,8 @@
 		<script type="text/javascript" src="/static/js/sensorsList.js"></script>
 		<script type="text/javascript" src="/static/js/search.js"></script>
 		<script type="text/javascript" src="/static/js/plotParameters.js"></script>
+		<script type="text/javascript" src="/static/js/newCompoundMetric.js"></script>
+		<script type="text/javascript" src="/static/js/deleteCompoundMetric.js"></script>
 
 	</body>
 </html>

@@ -1,6 +1,6 @@
 google.load("visualization", "1", {packages:["corechart"]});
 
-function displayMetricData(monitorIP, hostname, sensorname, metricname) {
+function displayMetricData(monitorIP, hostname, sensorname, sensortype, metricname) {
     $("#placeholder").hide();
     $("#metric_data").fadeIn();
     $.get(
@@ -13,7 +13,7 @@ function displayMetricData(monitorIP, hostname, sensorname, metricname) {
             $("#metric_name").html(metricname);
 
             // It shouldn't be based on sensor name but it's hardcoded like this cause we don't provide info about type of metric in Catalog's API
-            if (sensorname.toLowerCase().indexOf("sysinf") > -1) {
+            if (sensortype.toLowerCase().indexOf("system info") > -1) {
                 $("#chart_div").hide();
                 $("#text_data").fadeIn();
 

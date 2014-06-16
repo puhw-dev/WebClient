@@ -28,9 +28,10 @@ $(document).ready(function() {
         var metricname = this.value
         var hostname = $(this).find(':selected').data('host-name');
         var sensorname = $(this).find(':selected').data('sensor-name');
+        var sensortype = $("#available_sensors").find(':selected').data('sensortype');
         var monitorIP = $(this).find(':selected').data('monitor-ip');
 
-        refreshCurrentMetricFunction = function() { displayMetricData(monitorIP, hostname, sensorname, metricname); }
+        refreshCurrentMetricFunction = function() { displayMetricData(monitorIP, hostname, sensorname, sensortype, metricname); }
         refreshCurrentMetricFunction();
 
     });
