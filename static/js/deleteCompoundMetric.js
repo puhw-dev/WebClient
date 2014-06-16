@@ -6,8 +6,8 @@ $(document).ready(function() {
         var sensorname = available_metrics.find(':selected').data('sensor-name');
         var monitorIP = available_metrics.find(':selected').data('monitor-ip');
 
-        var login = $("#comp-metric-login").val();
-        var password = $("#comp-metric-password").val();
+        var login = $("#comp-metric-login-delete").val();
+        var password = $("#comp-metric-password-delete").val();
 
         $.post("/delete-compound-metric/" + hostname + "/" + sensorname + "/" + metricname,
             {
