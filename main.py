@@ -3,6 +3,7 @@ import os
 import requests
 import json
 import math
+import logging
 from threading import Thread
 from flask import Flask
 from flask import render_template, Response, request
@@ -15,6 +16,8 @@ app = Flask(__name__, static_path="/static", static_url_path="/static")
 app.config.from_pyfile("config.py")
 
 catalog_data_provider = CatalogDataProvider(app.config.get("CATALOG_HOST"))
+
+log = logging.getLogger()
 
 @app.route("/")
 def home():
@@ -105,6 +108,20 @@ def search():
     search_results = filter(lambda entity: search_phrase.lower() in entity["name"].lower(), search_data)
 
     return Response(json.dumps(search_results), mimetype='application/json')
+
+
+@app.route("/create-compound-metric/<host_name>/<sensor_name>/<metric_name>", methods=['POST'])
+def create_compound_metric(host_name, sensor_name, metric_name):
+    name = request.form["name"]
+    rpm = request.form["rpm"]
+    average = request.form["average"]
+    login = request.form["login"]
+    password = request.form["password"]
+
+    log.info(name + " " + rpm + " " + average + " " + login + " " + password)
+
+    return Response("Compound metric created", 201)
+
 
 if __name__ == "__main__":
 
