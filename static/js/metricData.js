@@ -1,3 +1,5 @@
+google.load("visualization", "1", {packages:["corechart"]});
+
 function displayMetricData(monitorIP, hostname, sensorname, metricname) {
     $("#placeholder").hide();
     $("#metric_data").fadeIn();

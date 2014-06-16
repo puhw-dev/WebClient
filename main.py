@@ -106,16 +106,6 @@ def search():
 
     return Response(json.dumps(search_results), mimetype='application/json')
 
-
-@app.route("/json_sin")
-def json_sin():
-    """Method which returns sinus with random noise as json - for charts testing purposes"""
-    values = [["x", "y"]]
-    for x in range(0, 100):
-        values.append([x/10., math.sin(x/10.) + random()])
-    return Response(json.dumps(values), mimetype='application/json')
-
-
 if __name__ == "__main__":
 
     # background thread which generates search data
